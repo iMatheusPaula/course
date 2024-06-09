@@ -14,9 +14,9 @@ services:
     tty: true
 
   php:
-    image: php:latest
+    image: php:8.2-fpm
     container_name: php-fpm
     expose:
       - 9000
     volumes:
-      - ./:/www
+      - ./:/usr/share/nginx/html
