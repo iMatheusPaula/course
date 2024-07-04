@@ -1,11 +1,42 @@
 <?php
 
+namespace Source\Qualifield;
+
 class User
 {
-    public $name;
-    public $surName;
-    public $age;
-    public $mail;
+    private $name;
+    private $surName;
+    private $age;
+    private $mail;
+    private $error;
+
+    public function setUser($firstName, $surName, $age, $mail): bool
+    {
+        $this->setName($firstName);
+        $this->setSurName($surName);
+        $this->setAge($age);
+        if(!$this->setMail($mail)){
+            $this->error = "O email {$this->getMail()} é invalido";
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    /**
+     * @param mixed $error
+     */
+    private function setError($error): void
+    {
+        $this->error = $error;
+    }
 
     /**
      * @return mixed
@@ -20,7 +51,7 @@ class User
      * @param $mail
      * @return bool
      */
-    public function setMail($mail): bool
+    private function setMail($mail): bool
     {
         $this->mail = $mail;
         if(filter_var($mail, FILTER_VALIDATE_EMAIL)) return true;
@@ -40,7 +71,7 @@ class User
      * @param $age
      * @return void
      */
-    public function setAge($age): void
+    private function setAge($age): void
     {
         $this->age = filter_var($age, FILTER_SANITIZE_NUMBER_INT);
     }
@@ -58,7 +89,7 @@ class User
      * @param $surName
      * @return void
      */
-    public function setSurName($surName): void
+    private function setSurName($surName): void
     {
         $this->surName = filter_var($surName, FILTER_SANITIZE_SPECIAL_CHARS);
     }
@@ -76,7 +107,7 @@ class User
      * @param $name
      * @return void
      */
-    public function setName($name): void
+    private function setName($name): void
     {
         $this->name = filter_var($name, FILTER_SANITIZE_SPECIAL_CHARS);
     }
