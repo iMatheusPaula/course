@@ -9,12 +9,21 @@ require __DIR__ . "/source/autoload.php";
  * http://php.net/manual/pt_BR/language.oop5.interfaces.php
  */
 fullStackPHPClassSession("implementacão", __LINE__);
-
+$user = new \Source\Contracts\User("Matheus", "Paula", "m@p.com");
+$userAdmin = new \Source\Contracts\UserAdmin("Matheus", "Paula", "m@p.com");
+var_dump($user, $userAdmin);
 
 /*
  * [ associação ] Um exemplo associando ao login
  */
 fullStackPHPClassSession("associação", __LINE__);
+
+$login = new \Source\Contracts\Login();
+
+var_dump(
+    $login->loginUser($user),
+    $login->loginAdmin($userAdmin)
+);
 
 
 /*
@@ -23,6 +32,10 @@ fullStackPHPClassSession("associação", __LINE__);
  */
 fullStackPHPClassSession("dependência", __LINE__);
 
+var_dump(
+    $login->login($user),
+    $login->login($userAdmin)->getFirstName()
+);
 
 
 
