@@ -9,7 +9,10 @@ require __DIR__ . "/source/autoload.php";
  * mas nunca para ser instanciada por um objeto.
  */
 fullStackPHPClassSession("superclass", __LINE__);
+$client = new \Source\App\User("Matheus", "Paula");
+$account = new \Source\Bank\Account("1111", "12413", $client, "10000");
 
+var_dump($account, $client);
 
 /*
  * [ especialização ] É uma classe filha que implementa a superclasse e se especializa
